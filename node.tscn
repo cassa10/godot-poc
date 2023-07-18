@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://br7jwmthool5r"]
+[gd_scene load_steps=6 format=3 uid="uid://br7jwmthool5r"]
 
 [ext_resource type="Script" path="res://scripts/node.gd" id="1_ue7qd"]
-[ext_resource type="Script" path="res://scripts/CharacterBody2D.gd" id="2_d7p54"]
+[ext_resource type="Script" path="res://scripts/movimiento_2d.gd" id="2_1v76p"]
+[ext_resource type="Texture2D" uid="uid://c6vmhx0vnkhr1" path="res://assets/crash.png" id="3_4vmqb"]
 [ext_resource type="Script" path="res://scripts/Background.gd" id="3_txb5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g74qg"]
+size = Vector2(61.5, 85)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ue7qd")
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(315, 525)
-script = ExtResource("2_d7p54")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 3
@@ -22,8 +22,9 @@ script = ExtResource("3_txb5f")
 [node name="ColorRect" type="ColorRect" parent="Background"]
 layout_mode = 0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 41.0
 color = Color(0.207843, 0.411765, 0.462745, 1)
+metadata/_edit_lock_ = true
 
 [node name="CheckButton" type="CheckButton" parent="Background"]
 layout_mode = 0
@@ -33,6 +34,23 @@ offset_bottom = 49.0
 scale = Vector2(0.0349872, 0.0741095)
 button_pressed = true
 text = "Cool Theme"
+
+[node name="Node2D" type="Node2D" parent="Background"]
+scale = Vector2(0.0347284, 0.0627861)
+
+[node name="Player" type="CharacterBody2D" parent="Background/Node2D"]
+position = Vector2(238, 508)
+script = ExtResource("2_1v76p")
+speed = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Node2D/Player"]
+position = Vector2(-3, -39)
+scale = Vector2(0.205268, 0.200102)
+texture = ExtResource("3_4vmqb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Node2D/Player"]
+position = Vector2(1, -39.9999)
+shape = SubResource("RectangleShape2D_g74qg")
 
 [connection signal="pressed" from="Background/CheckButton" to="Background" method="_change_theme_mode"]
 [connection signal="toggled" from="Background/CheckButton" to="Background" method="_change_theme_f"]
