@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://br7jwmthool5r"]
+
+[ext_resource type="Script" path="res://scripts/node.gd" id="1_ue7qd"]
+[ext_resource type="Script" path="res://scripts/CharacterBody2D.gd" id="2_d7p54"]
+[ext_resource type="Script" path="res://scripts/Background.gd" id="3_txb5f"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ue7qd")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(315, 525)
+script = ExtResource("2_d7p54")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.7949, 15.9271)
+script = ExtResource("3_txb5f")
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.207843, 0.411765, 0.462745, 1)
+
+[node name="CheckButton" type="CheckButton" parent="Background"]
+layout_mode = 0
+offset_left = 34.0
+offset_right = 193.0
+offset_bottom = 49.0
+scale = Vector2(0.0349872, 0.0741095)
+button_pressed = true
+text = "Cool Theme"
+
+[connection signal="pressed" from="Background/CheckButton" to="Background" method="_change_theme_mode"]
+[connection signal="toggled" from="Background/CheckButton" to="Background" method="_change_theme_f"]
